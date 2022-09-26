@@ -7,15 +7,17 @@ class PassengerCar : Car
     public int PassengerSeats { get; set; }
     public int PassengerCount
     {
-        get => PassengerCount;
+        get => passengerCount;
 
         set
         {
-            if (PassengerCount > PassengerSeats)
+            if (value > PassengerSeats)
                 throw new Exception("Кол-во пассажиров больше чем мест в автомобиле!");
+            passengerCount = value;
         }
     }
 
+    private int passengerCount;
 
     public PassengerCar(float fuelConsumption, int fuelTankCapacity, int speed, int passengerSeats)
     {
@@ -29,11 +31,11 @@ class PassengerCar : Car
     }
 
     public override float GetFuelDistanceWithСargoOrPassengers()
-        => (1 - 0.06f * PassengerCount) * FuelTankCapacity / FuelConsumption;
+        => (1 - 0.06f * passengerCount) * FuelTankCapacity / FuelConsumption;
         //=> FuelTankCapacity / (FuelConsumption * (1 + (0.06f * PassengerCount)));
         
     public override float GetFuelDistanceWithСargoOrPassengers(int fuelQuantity)
-        => (1 - 0.06f * PassengerCount) * fuelQuantity / FuelConsumption;
+        => (1 - 0.06f * passengerCount) * fuelQuantity / FuelConsumption;
         //=> fuelQuantity / (FuelConsumption * (1 + (0.06f * PassengerCount)));
 
     public override float GetTravelTime(int distance)

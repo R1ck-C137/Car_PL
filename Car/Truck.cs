@@ -6,14 +6,17 @@ class Truck : Car
 
     public int CargoWeight
     {
-        get => CargoWeight;
+        get => cargoWeight;
         
         set
         {
-            if (CargoWeight > LoadCapacity)
+            if (value > LoadCapacity)
                 throw new Exception("Вес груза больше чем грузоподъёмность автомобиля!");
+            cargoWeight = value;
         }
     }
+
+    private int cargoWeight;
 
     public Truck(float fuelConsumption, int fuelTankCapacity, int speed, int loadCapacity)
     {
@@ -27,11 +30,11 @@ class Truck : Car
     }
 
     public override float GetFuelDistanceWithСargoOrPassengers()
-        => (1 - 0.04f * (CargoWeight / 200)) * FuelTankCapacity / FuelConsumption;
+        => (1 - 0.04f * (cargoWeight / 200)) * FuelTankCapacity / FuelConsumption;
     //=> FuelTankCapacity / (FuelConsumption * (1 + (0.04f * (CargoWeight / 200))));
 
     public override float GetFuelDistanceWithСargoOrPassengers(int fuelQuantity)
-        => (1 - 0.04f * (CargoWeight / 200)) * fuelQuantity / FuelConsumption;
+        => (1 - 0.04f * (cargoWeight / 200)) * fuelQuantity / FuelConsumption;
     //=> fuelQuantity / (FuelConsumption * (1 + (0.04f * (CargoWeight / 200))));
 
     public override float GetTravelTime(int distance)
